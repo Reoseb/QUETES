@@ -2,7 +2,6 @@ describe("File upload and download tests", () => {
     beforeEach(() => {
       cy.visit("https://filebin.net/");
     });
-  
     it("Upload file and download it in Zip format", () => {
       cy.get("#fileField").attachFile("figolus.jpeg");
       cy.contains("It contains 1 uploaded file").should("be.visible");
@@ -18,9 +17,8 @@ describe("File upload and download tests", () => {
             "downloadedFromCypress.zip"
           );
           cy.readFile("mydownloads/zipFiles/downloadedFromCypress.zip");
-        });
-    });
-  
+        })
+    })
     it("Upload file and download it in Tar format", () => {
       cy.get("#fileField").attachFile("figolus.jpeg");
       cy.contains("It contains 1 uploaded file").should("be.visible");
@@ -29,13 +27,13 @@ describe("File upload and download tests", () => {
         .invoke("attr", "href")
         .then((downloadLink) => {
           const absulteLink = "https://filebin.net/" + downloadLink;
-          cy.log(downloadLink);
+          cy.log(absulteLink);
           cy.downloadFile(
             absulteLink,
             "mydownloads/tarFiles",
             "downloadedFromCypress.tar"
           );
           cy.readFile("mydownloads/tarFiles/downloadedFromCypress.tar");
-        });
-    });
-  });
+      })
+    })
+  })
